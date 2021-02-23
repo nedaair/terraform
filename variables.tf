@@ -19,3 +19,4 @@ variable "enalbe_dns_support" {
   description = "DNS 확인이 지원되는지 여부"
   default = true
 }
+
