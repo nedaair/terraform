@@ -4,12 +4,23 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_vpc" "default" {
-  cidr_block = var.cidr_block
-  enable_dns_hostnames = var.enable_dns_hostnames
-  enable_dns_support   = var.enalbe_dns_support
+resource "aws_security_group" "this" {
 
-  tags = {
-    Name = "main"
-  }
+}
+
+resource "aws_security_group_rule" "this" {
+  from_port = 8080
+  to_port = 8080
+  protocol = "tcp"
+  security_group_id = aws_security_group.this.id
+
+  type = "ingress"
+}
+
+resource "aws_security_group_rule" "this" {
+  from_port = 0
+  protocol = "all"
+  security_group_id = aws_security_group.this.id
+  to_port = 0
+  type = "egress"
 }
